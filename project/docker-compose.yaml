@@ -15,7 +15,7 @@ services:
       - ./database:/docker-entrypoint-initdb.d
 
   backend:
-    build: ./backend
+    build: .   # <-- Sửa thành dấu chấm ở đây là xong!
     container_name: nutribudget_backend
     restart: always
     ports:
