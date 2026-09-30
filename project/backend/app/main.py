@@ -5,7 +5,7 @@ import psycopg2
 
 app = FastAPI(
     title="NutriBudget API",
-    description="AI-driven meal planner balancing nutrition and cost for students.",
+    description="Pờ rô bây sừn",
     version="1.0.0"
 )
 app.add_middleware(
@@ -23,8 +23,8 @@ DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localho
 def read_root():
     return {
         "project": "NutriBudget API",
-        "status": "Running smoothly",
-        "message": "Welcome to AI-driven meal planner!"
+        "status": "Success",
+        "message": "mmb"
     }
 
 @app.get("/health/db")
@@ -38,7 +38,7 @@ def check_db_connection():
         connection.close()
         return {
             "status": "success",
-            "message": "Connected to PostgreSQL successfully!",
+            "message": "THÔNG",
             "database_version": db_version[0]
         }
     except Exception as e:
