@@ -29,7 +29,7 @@ class NutritionResponse(BaseModel):
     fat_g: float
     carb_g: float
     explanation: str = Field(..., description="LLM giai thich vi sao macro nay phu hop")
-    warning: Optional[str] = Field(
+    warning: Optional[list[str]] = Field(
         None, description="canh bao neu phat hien bat thuong (vd: BMI thap + muc tieu giam can)"
     )
 
