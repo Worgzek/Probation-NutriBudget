@@ -47,9 +47,6 @@ def calculate_bmr(
     age: int,
     gender: str,
 ) -> float:
-    """
-    Calculate Basal Metabolic Rate using Mifflin-St Jeor equation.
-    """
     base = ((10 * weight_kg)+ (6.25 * height_cm)- (5 * age))
     if gender == "male":
         return base + 5
@@ -60,9 +57,6 @@ def calculate_tdee(
     bmr: float,
     activity_level: str,
 ) -> float:
-    """
-    Calculate Total Daily Energy Expenditure.
-    """
     multiplier = ACTIVITY_MULTIPLIERS[activity_level]
     return bmr * multiplier
 
@@ -71,9 +65,6 @@ def calculate_bmi(
     height_cm: float,
     weight_kg: float,
 ) -> float:
-    """
-    Calculate Body Mass Index.
-    """
     height_m = height_cm / 100
     return weight_kg / (height_m ** 2)
 
@@ -82,9 +73,6 @@ def calculate_calorie_target(
     tdee: float,
     goal: str,
 ) -> float:
-    """
-    Calculate daily calorie target based on user's goal.
-    """
     adjustment = GOAL_CALORIE_ADJUSTMENT[goal]
     return tdee * adjustment
 
@@ -133,10 +121,6 @@ def generate_warnings(
     gender: str,
     goal: str,
 ) -> list[str]:
-    """
-    Generate deterministic warnings.
-    LLM must not modify these warnings or safety thresholds.
-    """
     warnings: list[str] = []
     threshold = LOW_CALORIE_THRESHOLD[gender]
 

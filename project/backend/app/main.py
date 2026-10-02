@@ -23,9 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
  
-DATABASE_URL = os.getenv(
-    "DATABASE_URL", "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
-)
+DATABASE_URL = os.getenv("DATABASE_URL")
  
  
 @app.get("/health")
