@@ -1,11 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
  
-from app.schemas import NutritionRequest, NutritionResponse
+from app.schemas import MealPlanRequest, MealPlanResponse, NutritionRequest, NutritionResponse
 from app.nutrition.calculator import calculate_nutrition
+from app.planner.optimizer import optimize_meal_plan
+
  
 import os
 import psycopg2
+
+from app.query import get_food_db
  
 app = FastAPI(
     title="NutriBudget API",
@@ -74,3 +78,31 @@ def get_nutrition_macros(payload: NutritionRequest):
         ),
         warning=result["warnings"],
     )
+
+@app.post(
+    "/api/v1/meal-plan",
+    response_model=MealPlanResponse
+)
+def create_meal_plan(payload: MealPlanRequest):
+    try:
+        food_db = get_food_db()
+
+        result = optimize_meal_plan(
+            macro_targets=payload.macro_targets.model_dump(),
+            budget=payload.budget.model_dump(),
+            food_db=food_db,
+        )
+
+        return result
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Meal plan generation failed: {str(e)}"
+        )

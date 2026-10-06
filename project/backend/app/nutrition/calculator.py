@@ -137,7 +137,7 @@ def generate_warnings(
     if calories < threshold:
         warnings.append(
             f"Lượng calo ước tính ({round(calories)} kcal) "
-            f"thấp hơn ngưỡng cấu hình ({threshold} kcal). "
+            f"thấp hơn ngưỡng tiêu chuẩn ({threshold} kcal). "
             "Nên xem xét lại mục tiêu dinh dưỡng hoặc "
             "tham khảo chuyên gia."
         )
